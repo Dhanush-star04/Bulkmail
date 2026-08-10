@@ -2,6 +2,9 @@ import express from "express";
 import cors from "cors";
 import nodemailer from "nodemailer";
 import mongoose from "mongoose";
+import dns from "dns";
+
+dns.setDefaultResultOrder("ipv4first");
 
 const app = express();
 
@@ -110,7 +113,9 @@ app.post("/sendemail", async (req, res) => {
     // ========================================
 
     const transporter = nodemailer.createTransport({
-      service: "gmail",
+      host: "smtp.gmail.com",
+      port: 465,
+      secure: true,
       auth: {
         user: user,
         pass: pass,
@@ -197,8 +202,10 @@ app.get("/gethistory", async (req, res) => {
 // LOGIN (hardcoded, no DB)
 // ========================================
 
-const ADMIN_USERNAME = "Dhanush";
-const ADMIN_PASSWORD = "123";
+const VALID_LOGINS = [
+  { username: "Dhanush", password: "123" },
+  { username: "test1@gmail.com", password: "1234" },
+];
 
 app.post("/login", (req, res) => {
 
@@ -214,7 +221,11 @@ app.post("/login", (req, res) => {
 
   }
 
-  if (email.trim() !== ADMIN_USERNAME || password.trim() !== ADMIN_PASSWORD) {
+  const match = VALID_LOGINS.find(
+    (cred) => cred.username === email.trim() && cred.password === password.trim()
+  );
+
+  if (!match) {
 
     return res.status(401).json({
       message: "Invalid credentials.",
