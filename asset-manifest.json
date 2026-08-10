@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/Bulkmail/static/css/main.0c3e5383.css",
+    "main.js": "/Bulkmail/static/js/main.e6b5da10.js",
+    "static/js/453.35732811.chunk.js": "/Bulkmail/static/js/453.35732811.chunk.js",
+    "index.html": "/Bulkmail/index.html",
+    "main.0c3e5383.css.map": "/Bulkmail/static/css/main.0c3e5383.css.map",
+    "main.e6b5da10.js.map": "/Bulkmail/static/js/main.e6b5da10.js.map",
+    "453.35732811.chunk.js.map": "/Bulkmail/static/js/453.35732811.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.0c3e5383.css",
+    "static/js/main.e6b5da10.js"
+  ]
+}
