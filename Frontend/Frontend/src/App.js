@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Login from './Login';
 
 const ITEMS_PER_PAGE = 5;
+const API_URL = 'https://bulkmail-flame.vercel.app';
 
 export default function App() {
   const [admin, setAdmin] = useState(() => localStorage.getItem('bulkmail_admin'));
@@ -48,7 +49,7 @@ export default function App() {
     setStatus({ loading: true, message: '', type: '' });
 
     try {
-      const response = await fetch('http://localhost:5000/sendemail', {
+      const response = await fetch(`${API_URL}/api/sendemail`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ subject, message: body, emailList: recipients })
@@ -74,7 +75,7 @@ export default function App() {
     setView('history');
     setHistoryPage(0);
     try {
-      const response = await fetch('http://localhost:5000/gethistory');
+      const response = await fetch(`${API_URL}/api/gethistory`);
       const data = await response.json();
       setHistory(data);
     } catch (error) {
